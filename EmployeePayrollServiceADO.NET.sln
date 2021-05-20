@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeePayrollServiceADO.NET", "EmployeePayrollServiceADO.NET\EmployeePayrollServiceADO.NET.csproj", "{0ADAD3C6-A1E5-44A0-9169-AC8591CA5084}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeePayrollServiceADO.NETTest", "EmployeePayrollServiceADO.NETTest\EmployeePayrollServiceADO.NETTest.csproj", "{24712949-7D0E-4E2F-B000-912513DEAE97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeePayrollServiceADO.NETTest", "EmployeePayrollServiceADO.NETTest\EmployeePayrollServiceADO.NETTest.csproj", "{24712949-7D0E-4E2F-B000-912513DEAE97}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6D10CDE3-124A-4A39-A863-8738DEC191BC}"
+	ProjectSection(SolutionItems) = preProject
+		dbo.SqlProcedureName.sql = dbo.SqlProcedureName.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
