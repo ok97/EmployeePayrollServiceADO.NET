@@ -51,8 +51,7 @@ namespace EmployeePayrollServiceADO.NETTest
           
             string EmployeeName = "Terisa";   //Arrange
             double BasicPay = 60000;
-            EmployeeRepository repository = new EmployeeRepository();
-            EmployeeModel empModel = new EmployeeModel();
+            EmployeeRepository repository = new EmployeeRepository();          
             
             repository.UpdateBasicPay(EmployeeName, BasicPay);//Act
             double expectedPay = repository.UpdatedSalaryFromDatabase(EmployeeName);
