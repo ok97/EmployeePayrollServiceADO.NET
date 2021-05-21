@@ -18,13 +18,13 @@ namespace EmployeePayrollServiceADO.NET
         */
 
         // public static string connectionString = @"Data Source=DESKTOP-D8GLB66\SQLEXPRESS;Initial Catalog=Payroll_Service;"; //Specifying the connection string from the sql server connection.
-      
+
         // public static string connectionString = @"Data Source=DESKTOP-D8GLB66\SQLEXPRESS;Initial Catalog=Payroll_Service;Integrated Security=True;User ID=DESKTOP-D8GLB66\Om;Password=ladu"; //Specifying the connection string from the sql server connection.
         public static string connectionString = @"Data Source=DESKTOP-D8GLB66\SQLEXPRESS;Initial Catalog=Payroll_Service;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"; //Specifying the connection string from the sql server connection.
-        
+
 
         SqlConnection connection = new SqlConnection(connectionString); // Establishing the connection using the Sqlconnection.  
-       
+
         public bool DataBaseConnection()
         {
             try
@@ -52,23 +52,23 @@ namespace EmployeePayrollServiceADO.NET
         */
         public void GetAllEmployeeData()
         {
-           
+
             EmployeeModel employeemodel = new EmployeeModel(); //Creating Employee model class object
             try
-            {               
+            {
                 using (connection)
-                {                 
+                {
                     string query = @"select * from dbo.payroll_service"; // Query to get all the data from table./*TableName:-dbo.payroll_service*/
 
                     this.connection.Open(); //open connection
-                  
+
                     SqlCommand command = new SqlCommand(query, connection); //accept query and connection
-               
+
                     SqlDataReader reader = command.ExecuteReader(); // Execute sqlDataReader to fetching all records
-                    
+
                     if (reader.HasRows)     // Checking datareader has rows or not.               
                     {
-                       // Console.WriteLine("EmployeeId, EmployeeName, PhoneNumber, Address, Department, Gender, BasicPay, Deductions, TaxablePay, TaxablePay, Tax, NetPay, StartDate, City, Country");                                            
+                        // Console.WriteLine("EmployeeId, EmployeeName, PhoneNumber, Address, Department, Gender, BasicPay, Deductions, TaxablePay, TaxablePay, Tax, NetPay, StartDate, City, Country");                                            
                         while (reader.Read()) //using while loop for read multiple rows.
                         {
                             employeemodel.EmployeeId = reader.GetInt32(0);
@@ -87,7 +87,7 @@ namespace EmployeePayrollServiceADO.NET
                             employeemodel.Country = reader.GetString(13);
                             Console.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}", employeemodel.EmployeeId, employeemodel.EmployeeName, employeemodel.PhoneNumber,
                             employeemodel.Address, employeemodel.Department, employeemodel.Gender, employeemodel.BasicPay, employeemodel.Deductions, employeemodel.TaxablePay, employeemodel.Tax, employeemodel.NetPay, employeemodel.StartDate, employeemodel.City, employeemodel.Country);
-                            
+
                         }
                     }
                     else
@@ -96,29 +96,29 @@ namespace EmployeePayrollServiceADO.NET
                     }
                     reader.Close(); //close
                 }
-            }           
+            }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }            
+            }
             finally
             {
                 this.connection.Close(); //Always ensuring the closing of the connection
             }
         }
         public void AddEmployee(EmployeeModel model) //insert record to the table
-        {            
+        {
             try
             {
                 using (connection)
-                {                  
+                {
                     SqlCommand command = new SqlCommand("dbo.SqlProcedureName", this.connection);   //Creating a stored Procedure for adding employees into database
-                   
+
                     command.CommandType = CommandType.StoredProcedure; //Command type is a class to set as stored procedure
-                    // Adding values from employeemodel to stored procedure 
-                   
+                                                                       // Adding values from employeemodel to stored procedure 
+
                     command.Parameters.AddWithValue("@EmployeeId", model.EmployeeId);
-                    command.Parameters.AddWithValue("@EmployeeName", model.EmployeeName);                    
+                    command.Parameters.AddWithValue("@EmployeeName", model.EmployeeName);
                     command.Parameters.AddWithValue("@PhoneNumber", model.PhoneNumber);
                     command.Parameters.AddWithValue("@Address", model.Address);
                     command.Parameters.AddWithValue("@Department", model.Department);
@@ -145,25 +145,25 @@ namespace EmployeePayrollServiceADO.NET
             {
                 connection.Close();
             }
-             
+
         }
 
-       /* UC3:- Ability to update the salary i.e. the base pay for Employee 
-                Terisa to 3000000.00 and sync it with Database.
-                - Update the employee payroll in the database.
-                - Update the Employee Payroll Object with the Updated Salary.
-                - Compare Employee Payroll Object with DB to pass the MSTest Test.
-        */
+        /* UC3:- Ability to update the salary i.e. the base pay for Employee 
+                 Terisa to 3000000.00 and sync it with Database.
+                 - Update the employee payroll in the database.
+                 - Update the Employee Payroll Object with the Updated Salary.
+                 - Compare Employee Payroll Object with DB to pass the MSTest Test.
+         */
 
         public bool UpdateBasicPay(string EmployeeName, double BasicPay)
-        {           
+        {
             try
             {
                 using (connection)
                 {
                     connection.Open();
                     string query = @"update dbo.payroll_service set BasicPay=@inputBasicPay where EmployeeName=@inputEmployeeName";
-                    SqlCommand command = new SqlCommand(query, connection);  
+                    SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@inputBasicPay", BasicPay); //parameters transact SQl stament or store procedure
                     command.Parameters.AddWithValue("@inputEmployeeName", EmployeeName);
                     var result = command.ExecuteNonQuery(); //ExecuteNonQuery and store result
@@ -182,6 +182,42 @@ namespace EmployeePayrollServiceADO.NET
             }
             return true;
         }
+
+        /*UC4:- Ability to update the salary i.e. the base pay for Employee.
+               Terisa to 3000000.00 and sync it with Database using JDBC Prepared Statement.
+               - Update the employee payroll in the database.
+               - Update the Employee Payroll Object with the Updated Salary.
+               - Compare Employee Payroll Object with DB to pass the MSTest Test.
+       */
+        public double UpdatedSalaryFromDatabase(string EmployeeName)
+        {
+
+            string cconnectionString = @"Data Source=DESKTOP-D8GLB66\SQLEXPRESS;Initial Catalog=Payroll_Service;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"; //Specifying the connection string from the sql server connection.
+
+            SqlConnection connection = new SqlConnection(cconnectionString);
+            try
+            {
+                using (connection)
+                {
+                    string query = @"select BasicPay from dbo.payroll_service where EmployeeName=@inputEmployeeName";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    connection.Open();
+                    command.Parameters.AddWithValue("@inputEmployeeName", EmployeeName);
+                    return (double)command.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+        
 
     }
 }
