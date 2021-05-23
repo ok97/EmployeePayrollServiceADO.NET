@@ -17,7 +17,7 @@ namespace EmployeePayrollServiceADO.NET
             // repository.DataBaseConnection(); // UC1 Ensuring the database connection using the sql connection string
 
 
-          // repository.GetAllEmployeeData(); // UC2
+            // repository.GetAllEmployeeData(); // UC2
 
             //  AddRecordInput(); // UC2 add Record for database
 
@@ -29,7 +29,9 @@ namespace EmployeePayrollServiceADO.NET
 
             // repository.FindGroupedByGenderRecord("F");//UC6
 
-            repository. InsertIntoMultipleTablesWithTransactions(); //UC7
+            // repository. InsertIntoMultipleTablesWithTransactions(); //UC7
+
+            repository.RetrieveEmployeeDetailsFromMultipleTables();
 
 
 
