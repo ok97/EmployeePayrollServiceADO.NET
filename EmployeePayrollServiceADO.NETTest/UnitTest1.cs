@@ -61,7 +61,7 @@ namespace EmployeePayrollServiceADO.NETTest
 
 
 
-        /* TC5:- Compare Employee Payroll Object with DB to pass the Test.*/
+        /* TC6:- Ability to find sum, average, min, max and number of male and female employees.*/
 
         [Test]
         public void FindGroupedByGenderRecord()

@@ -17,9 +17,9 @@ namespace EmployeePayrollServiceADO.NET
             // repository.DataBaseConnection(); // UC1 Ensuring the database connection using the sql connection string
 
 
-            //repository.GetAllEmployeeData(); // UC2
+          // repository.GetAllEmployeeData(); // UC2
 
-            // AddRecordInput(); // UC2 add Record for database
+            //  AddRecordInput(); // UC2 add Record for database
 
             //repository.UpdateBasicPay("Terisa", 3000000);//UC3 update BasicPay where name is Terisa table 
 
@@ -27,7 +27,9 @@ namespace EmployeePayrollServiceADO.NET
 
             // repository.EmployeesFromForDateRange("2020-01-15"); //UC5
 
-            repository.FindGroupedByGenderRecord("F");
+            // repository.FindGroupedByGenderRecord("F");//UC6
+
+            repository. InsertIntoMultipleTablesWithTransactions(); //UC7
 
 
 
@@ -41,19 +43,19 @@ namespace EmployeePayrollServiceADO.NET
             
                 EmployeeModel model = new EmployeeModel();// Adding Employee To Database
                 DateTime now = DateTime.Now;
-                model.EmployeeId = 4;
-                model.EmployeeName = "Risa";
-                model.PhoneNumber = "1234567891";
-                model.Address = "Mumbai";
-                model.Department = "HR";
+                model.EmployeeId = 10;
+                model.EmployeeName = "Pavitra";
+                model.PhoneNumber = "1237896541";
+                model.Address = "Lalolo";
+                model.Department = "Developer";
                 model.Gender = "F";
-                model.BasicPay = 20000;
-                model.Deductions = 2000;
-                model.TaxablePay = 100;
-                model.Tax = 200;
-                model.NetPay = 1800;
+                model.BasicPay = 45000;
+                model.Deductions = 4000;
+                model.TaxablePay = 1200;
+                model.Tax = 1000;
+                model.NetPay = 1500;
                 model.StartDate = now;
-                model.City = "Mumbai";
+                model.City = "Chennai";
                 model.Country = "IN";
                
                 repository.AddEmployee(model);  //call AddEmployee method and pass model values       
