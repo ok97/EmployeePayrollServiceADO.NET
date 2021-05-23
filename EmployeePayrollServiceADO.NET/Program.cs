@@ -31,7 +31,7 @@ namespace EmployeePayrollServiceADO.NET
 
             // repository. InsertIntoMultipleTablesWithTransactions(); //UC7
 
-            repository.RetrieveEmployeeDetailsFromMultipleTables();
+            repository.RetrieveEmployeeDetailsFromMultipleTables(); //UC8
 
 
 
